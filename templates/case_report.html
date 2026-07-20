@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% block title %}Case Report · CrimeGuard AI{% endblock %}
+{% block content %}
+<div class="bg-hero">
+  <main class="wrap" style="padding:44px 24px 80px;" id="report-root">
+
+    <div class="report-topbar">
+      <a href="{{ url_for('home') }}" class="back-link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        New Case
+      </a>
+      <div class="badge-row">
+        <a href="{{ url_for('history') }}" class="btn btn-ghost btn-sm">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l4 2"/></svg>
+          History
+        </a>
+        <button class="btn btn-primary btn-sm" onclick="window.print()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+          Case Ticket PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- HERO VERDICT CARD -->
+    <div class="card hero-verdict-card mt-5" id="hero-card" data-risk="—">
+      <div class="hero-verdict-left">
+        <p class="eyebrow">A.I. Prediction Output &middot; Case #<span id="case-id">—</span></p>
+        <h1 id="verdict-title" class="verdict-title">—</h1>
+        <div class="mt-3" style="display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+          <span id="risk-badge" class="risk-pill">—</span>
+          <span class="text-muted mono" style="font-size:13px;">Severity <span id="severity-val">—</span>/10</span>
+        </div>
+        <p class="lede mt-3" id="verdict-desc" style="max-width:520px;">—</p>
+      </div>
+
+      <div class="hero-verdict-right">
+        <div class="prob-ring-wrap">
+          <svg viewBox="0 0 140 140" class="prob-ring">
+            <circle cx="70" cy="70" r="60" class="prob-ring-track"></circle>
+            <circle cx="70" cy="70" r="60" class="prob-ring-fill" id="prob-ring-fill"></circle>
+          </svg>
+          <div class="prob-ring-label">
+            <span id="prob-value" class="prob-ring-value mono">0</span><span class="prob-ring-pct mono">%</span>
+          </div>
+        </div>
+        <p class="prob-ring-caption">Resolution Probability</p>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stat-grid mt-5">
+      <div class="card stat-card">
+        <div class="stat-card-header">
+          <span class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </span>
+          <span class="stat-label">Officers Recommended</span>
+        </div>
+        <div id="officers-value" class="stat-value text-primary mono">—</div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-card-header">
+          <span class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span class="stat-label">Suspect Status</span>
+        </div>
+        <div id="suspect-value" class="stat-value" data-tag="suspect_status">—</div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-card-header">
+          <span class="stat-icon siren">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>
+          </span>
+          <span class="stat-label">Weapon</span>
+        </div>
+        <div id="weapon-value" class="stat-value text-siren" data-tag="weapon_used">—</div>
+      </div>
+
+      <div class="card stat-card">
+        <div class="stat-card-header">
+          <span class="stat-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          </span>
+          <span class="stat-label">Location</span>
+        </div>
+        <div id="location-value" class="stat-value" data-tag="location">—</div>
+      </div>
+    </div>
+
+    <div class="grid-2 mt-5" style="align-items:start;">
+      <div class="card">
+        <h3 class="section-title-dot">Prediction Factors</h3>
+        <p class="section-desc">Visual representation of the most influential factors behind the prediction.</p>
+        <div id="contribution-chart" class="mt-4"></div>
+      </div>
+
+      <div class="card">
+        <h3 class="section-title-dot">Recommended Actions</h3>
+        <p class="section-desc">Prioritised recommendations from the case analysis.</p>
+        <ol id="action-plan" class="mt-4" style="margin:0; padding:0; list-style:none;"></ol>
+      </div>
+    </div>
+
+    <div class="card mt-5">
+      <h3 class="section-title-dot">Prediction Log</h3>
+      <pre id="trace-log" class="mono" style="margin-top:14px; font-size:12px; color:var(--muted); white-space:pre-wrap; line-height:1.8;"></pre>
+    </div>
+
+    <!-- PRINT-ONLY CASE TICKET (hidden on screen, shown only when printing) -->
+    <div class="print-ticket" id="print-ticket">
+      <div class="ticket-header">
+        <div class="ticket-brand">
+          <span class="ticket-badge">🚔</span>
+          <span class="ticket-title">CrimeGuard AI — Case Ticket</span>
+        </div>
+        <span id="ticket-risk" class="ticket-risk">—</span>
+      </div>
+      <p class="ticket-meta">Case #<span id="ticket-case-id">—</span> &middot; <span id="ticket-timestamp">—</span></p>
+      <hr class="ticket-rule">
+
+      <div class="ticket-prob">
+        <span id="ticket-prob-value" class="ticket-prob-value">—</span>
+        <span class="ticket-prob-label">resolution probability</span>
+      </div>
+
+      <p class="ticket-line"><strong>Verdict:</strong> <span id="ticket-verdict">—</span></p>
+      <p class="ticket-line"><strong>Recommended officers:</strong> <span id="ticket-officers">—</span></p>
+
+      <h3 class="ticket-section-title">Case Details :</h3>
+      <table class="ticket-table"><tbody id="ticket-table-body"></tbody></table>
+
+      <h3 class="ticket-section-title">Action Plan :</h3>
+      <ol class="ticket-actions" id="ticket-actions"></ol>
+
+      <p class="ticket-footnote">© 2026 CrimeGuard AI &middot; AI-Powered Crime Resolution Prediction &middot; Save as PDF.</p>
+    </div>
+
+  </main>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/case-report.js') }}"></script>
+{% endblock %}

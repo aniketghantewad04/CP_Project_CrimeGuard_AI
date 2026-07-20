@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}CrimeGuard AI · Predict crime resolution in seconds{% endblock %}
+{% block content %}
+<div class="bg-hero">
+  <main class="wrap" style="padding:56px 24px 80px;">
+
+    <div class="badge-row">
+      <span class="pill pill-primary"><span class="dot"></span>Model Online</span>
+      <span class="pill"><span class="dot"></span>Real Case Patterns</span>
+      <span class="pill pill-mod"><span class="dot"></span>Live Prediction</span>
+    </div>
+
+    <h1 class="mt-3" style="font-size:55px; line-height:1.08; max-width:720px;">
+    Crime Resolution,<br>
+    <span class="text-primary">Predicted.</span>
+    <span class="text-siren">Actioned.</span>
+    </h1>
+    <p class="lede mt-3">
+      Transform case details into actionable insights with CrimeGuard AI. Get resolution probability, risk assessment, officer deployment recommendations, and prioritised action plans — in under a second.
+    </p>
+
+    <form id="predict-form" class="mt-6" data-endpoint="{{ url_for('api_predict') }}" data-report-url="{{ url_for('case_report') }}">
+
+  <!-- Main Dashboard Dashboard Grid Wrapper -->
+  <div class="dashboard-grid">
+    
+    <!-- BOX 1: CASE LOCATION -->
+    <div class="card section-block" style="margin-bottom:16px;">
+      <div class="card-header">
+        <div class="icon-wrapper primary-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <h3>Case Location</h3>
+          <p class="section-desc">Where and what kind of incident.</p>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field-group">
+          <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg> Country</label>
+          <select name="country" required>
+            <option value="">Select country</option>
+            {% for c in countries %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="M15 3v18"/><path d="M3 9h18"/><path d="M3 15h18"/></svg> Area Type</label>
+          <select name="area_type" required>
+            <option value="">Select area</option>
+            {% for a in area_types %}<option value="{{ a }}">{{ a }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <div class="field-row mt-3">
+        <div class="field-group">
+          <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="12" x="5" y="6" rx="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4 12H2"/><path d="M22 12h-2"/></svg> Crime Type</label>
+          <select name="crime_type" required>
+            <option value="">Select crime</option>
+            {% for c in crime_types %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+          </select>
+        </div>
+
+        <div class="field-group">
+          <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg> Severity Score (1 – 10)</label>
+          <input type="number" name="crime_severity_score" min="1" max="10" step="0.1" placeholder="5" required>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="right-stack">
+      
+      <!-- BOX 2: ENVIRONMENT & EVIDENCE -->
+      <div class="card section-block" >
+        <div class="card-header">
+          <div class="icon-wrapper siren-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 17.5 3 6V3h3l11.5 11.5z"/><path d="m13 19 6-6"/><path d="m16 22 4-4"/><path d="m19 11 2-2"/></svg>
+          </div>
+          <div>
+            <h3>Environment &amp; Evidence</h3>
+            <p class="section-desc">Surveillance, lighting, and weapon used.</p>
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field-group">
+            <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 21v-4a2 2 0 0 1 4 0v4"/><path d="M5 21V10a7 7 0 0 1 14 0v11"/></svg> Weapon Used</label>
+            <select name="weapon_used" required>
+              <option value="">Select weapon</option>
+              {% for w in weapons %}<option value="{{ w }}">{{ w }}</option>{% endfor %}
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 7.5V18a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7.5"/><path d="M12 14a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="m19 4-3.5 3.5"/><path d="M5 4l3.5 3.5"/></svg> CCTV Coverage</label>
+            <select name="cctv_coverage" required>
+              <option value="">Select level</option>
+              {% for c in cctv %}<option value="{{ c }}">{{ c }}</option>{% endfor %}
+            </select>
+          </div>
+        </div>
+
+        <div class="field-row mt-3">
+          <div class="field-group">
+            <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg> Lighting Condition</label>
+            <select name="lighting_condition" required>
+              <option value="">Select lighting</option>
+              {% for l in lighting %}<option value="{{ l }}">{{ l }}</option>{% endfor %}
+            </select>
+          </div>
+
+          <div class="field-group">
+            <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> Gang Related</label>
+            <select name="gang_related" required>
+              <option value="">Select</option>
+              {% for g in gang %}<option value="{{ g }}">{{ g }}</option>{% endfor %}
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- BOX 3: SUSPECT PROFILE -->
+      
+    </div>
+    </div>
+    <div class="card section-block" style="width:100%; display:block; margin-bottom:50px;">
+        <div class="card-header">
+          <div class="icon-wrapper subtle-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          </div>
+          <div>
+            <h3>Suspect Profile</h3>
+            <p class="section-desc">Current status of any identified suspect.</p>
+          </div>
+        </div>
+        <div class="field-group" style="margin-bottom:0; max-width:1000px;">
+          <label><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg> Suspect Status</label>
+          <select name="suspect_status" required>
+            <option value="">Select status</option>
+            {% for s in suspects %}<option value="{{ s }}">{{ s }}</option>{% endfor %}
+          </select>
+        </div>
+      </div>
+
+  
+
+      <div class="stack-center mt-2" style="margin-top:30px">
+        <button type="submit" class="btn btn-primary" id="analyze-btn" style="padding:14px 34px; font-size:15px;">
+          🚔 Analyze Case
+        </button>
+      
+      </div>
+    </form>
+
+  </main>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/predict-form.js') }}"></script>
+{% endblock %}

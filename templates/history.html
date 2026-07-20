@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Case History · CrimeGuard AI{% endblock %}
+{% block content %}
+<div class="bg-hero">
+  <main class="wrap" style="padding:56px 24px 80px;">
+
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:16px;">
+      <div>
+        <p class="eyebrow">Ledger</p>
+        <h1 style="font-size:36px;">Case History</h1>
+        <p class="lede mt-2">Every prediction generated on this device. Stored locally — never leaves your browser.</p>
+      </div>
+      <a href="{{ url_for('home') }}" class="btn btn-primary">+ New Case</a>
+    </div>
+
+    <div id="history-empty" class="card stack-center mt-6" style="padding:60px 20px; display:none;">
+      <p class="text-muted">No cases yet. Run your first prediction to see it here.</p>
+      <a href="{{ url_for('home') }}" class="btn btn-primary mt-4">Analyze a Case</a>
+    </div>
+
+    <ul id="history-list" class="mt-6" style="display:flex; flex-direction:column; gap:10px;"></ul>
+
+  </main>
+</div>
+{% endblock %}
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/history.js') }}"></script>
+{% endblock %}

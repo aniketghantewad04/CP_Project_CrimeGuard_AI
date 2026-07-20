@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block title %}About · CrimeGuard AI{% endblock %}
+{% block content %}
+<div class="bg-hero">
+  <main class="wrap-narrow" style="padding:56px 24px 80px;">
+
+    <p class="eyebrow">About the project</p>
+    <h1 style="font-size:50px; max-width:600px;">
+    Smarter policing,<br>
+    <span class="text-primary">powered by data.</span>
+    </h1>
+    <p class="lede mt-3">CrimeGuard AI is a smart tool that analyses crime data to predict how likely a case is to be resolved — and helps police make sharper decisions in seconds.</p>
+
+    <div class="card mt-6">
+      <h3 style="font-size:18px;">Why this matters</h3>
+      <p class="text-muted mt-2" style="line-height:1.7;">
+        Crime is rising, and police resources are limited. Officers can't be everywhere at once.
+        CrimeGuard AI helps investigators focus on the cases that need attention most — spotting
+        high-risk situations early, allocating officers where they'll make the biggest difference,
+        and surfacing the environmental factors (lighting, CCTV, suspect visibility) that make cases solvable.
+      </p>
+    </div>
+
+    <!-- ===== HOW IT WORKS SECTION ===== -->
+    <div class="mt-6">
+      <h3 style="font-size:18px;">How it works</h3>
+      <div class="grid-3 mt-3">
+        <!-- Card 1: Enter Details -->
+        <div class="card">
+          <div class="icon-wrapper primary-icon mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+            </svg>
+          </div>
+          <p class="mono text-white" style="font-size:14px; font-weight:600;">1. Enter Details</p>
+          <p class="text-muted mt-1" style="font-size:13px;">Provide the essential details required for analysis.</p>
+        </div>
+
+        <!-- Card 2: AI Analyses -->
+        <div class="card">
+          <div class="icon-wrapper primary-icon mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 3v1.5M4.5 8.25H3m10.5-5.25v1.5M12 3v1.5m6.75 3.75h1.5m-1.5 3h1.5m-16.5 0h1.5m15 3h1.5M12 19.5v1.5m-3.75-1.5v1.5m7.5-1.5v1.5M4.5 15.75H3m18 0h-1.5M6 7.5h12a1.5 1.5 0 0 1 1.5 1.5v6a1.5 1.5 0 0 1-1.5 1.5H6A1.5 1.5 0 0 1 4.5 15V9A1.5 1.5 0 0 1 6 7.5Z" />
+            </svg>
+          </div>
+          <p class="mono text-white" style="font-size:14px; font-weight:600;">2. AI Analyses</p>
+          <p class="text-muted mt-1" style="font-size:13px;">The model evaluates all inputs and estimates the likelihood of case resolution.</p>
+        </div>
+
+        <!-- Card 3: Get Results -->
+        <div class="card">
+          <div class="icon-wrapper primary-icon mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v5.25c0 .621-.504 1.125-1.125 1.125h-2.25A1.125 1.125 0 0 1 3 18.375v-5.25ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v9.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125v-9.75ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v14.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+            </svg>
+          </div>
+          <p class="mono text-white" style="font-size:14px; font-weight:600;">3. Get Results</p>
+          <p class="text-muted mt-1" style="font-size:13px;">Receive the predicted outcome, risk level, officer recommendation, and actionable investigation insights.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== WHAT YOU'LL GET OUT OF IT SECTION ===== -->
+    <div class="mt-6">
+      <h3 style="font-size:18px; margin-bottom:16px;">What you'll get out of it</h3>
+      <div style="display:flex; flex-direction:column; gap:12px;">
+        
+        <!-- Row 1 -->
+        <div class="card" style="padding: 16px 24px; display: flex; align-items: center; gap: 16px;">
+          <div class="icon-wrapper primary-icon" style="width: 32px; height: 32px;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 16px; height: 16px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+            </svg>
+          </div>
+          <span class="text-white" style="font-size:14px;">Instant prediction of the likelihood that a case will be resolved.</span>
+        </div>
+
+        <!-- Row 2 -->
+        <div class="card" style="padding: 16px 24px; display: flex; align-items: center; gap: 16px;">
+          <div class="icon-wrapper primary-icon" style="width: 32px; height: 32px;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 16px; height: 16px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+            </svg>
+          </div>
+          <span class="text-white" style="font-size:14px;">Receive AI-powered recommendations for officer allocation.</span>
+        </div>
+
+        <!-- Row 3 -->
+        <div class="card" style="padding: 16px 24px; display: flex; align-items: center; gap: 16px;">
+          <div class="icon-wrapper primary-icon" style="width: 32px; height: 32px;">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="width: 16px; height: 16px;">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a3 3 0 0 0-3-3H9m3 3h3a3 3 0 0 0 3-3m-9 1.5h.008v.008H9v-.008Zm6 0h.008v.008H15v-.008Zm1.5-5.25a3 3 0 1 1-6 0 3 3 0 0 1 6 0ZM6 18a.75.75 0 0 1-.75-.75V8.169a2.25 2.25 0 0 1 .536-1.472L7.33 4.58A2.25 2.25 0 0 1 9.043 3.75h5.914c.664 0 1.294.293 1.712.803l1.544 1.889a2.25 2.25 0 0 1 .537 1.472v9.081a.75.75 0 0 1-.75.75H6Z" />
+            </svg>
+          </div>
+          <span class="text-white" style="font-size:14px;">Actionable recommendations to improve area safety — better lighting, more CCTV, patrol frequency.</span>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card mt-6" style="border-color:rgba(255,71,87,0.3); background:rgba(255,71,87,0.05);">
+      <h3 style="font-size:16px;" class="text-siren">Disclaimer</h3>
+      <p class="text-muted mt-2" style="font-size:14px;">
+        CrimeGuard AI supports investigative decision-making through AI-powered case analysis. While the system provides data-driven predictions and recommendations, final operational decisions should always rely on verified evidence, official protocols, and professional judgement.
+      </p>
+    </div>
+
+    <div class="stack-center mt-6" style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+      <a href="{{ url_for('home') }}" class="btn btn-primary">Try the predictor</a>
+    </div>
+
+  </main>
+</div>
+{% endblock %}
