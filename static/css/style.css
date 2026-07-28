@@ -581,7 +581,7 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
     grid-template-columns:1fr;
   }
 .btn-ghost {
-  padding: 10px 5px 10px 5px;
+  padding: -1px 5px 10px 5px;
 }
 }
 
