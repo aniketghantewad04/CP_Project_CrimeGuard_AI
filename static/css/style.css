@@ -561,7 +561,7 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
     margin_right:-20px;  }
 
   .card{
-    width:100%;
+    width:101%;
     padding:20px;
   }
 
@@ -581,7 +581,7 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
     grid-template-columns:1fr;
   }
 .btn-ghost {
-  padding: -1px 5px 10px 5px;
+  padding: 5px 12px 10px 14px;
 }
 }
 
