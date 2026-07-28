@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
 
+/* =========================================================
+   ROOT VARIABLES
+   ========================================================= */
 :root{
   --bg:#070b13; /* Perfectly deep modern space dark background */
   --bg-hero-a:#0b1120;
@@ -32,6 +35,9 @@
   --shadow-glow-red: 0 0 40px rgba(239,68,68,0.4);
 }
 
+/* =========================================================
+   RESET / BASE
+   ========================================================= */
 *{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
 body{
@@ -43,6 +49,21 @@ body{
   -webkit-font-smoothing:antialiased;
 }
 
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; margin:0; padding:0; }
+button{ font-family:inherit; cursor:pointer; }
+input, select{ font-family:inherit; }
+
+.mono{ font-family:var(--font-mono); }
+
+::selection{ background:var(--primary); color:#fff; }
+::-webkit-scrollbar{ width:8px; height:8px; }
+::-webkit-scrollbar-track{ background:var(--bg); }
+::-webkit-scrollbar-thumb{ background:var(--border-strong); border-radius:4px; }
+
+/* =========================================================
+   BACKGROUND / HERO GRID
+   ========================================================= */
 .bg-hero{
   position:relative;
   background:
@@ -62,14 +83,17 @@ body{
   -webkit-mask-image:radial-gradient(ellipse 80% 60% at 25% 0%, black 30%, transparent 75%);
 }
 
-a{ color:inherit; text-decoration:none; }
-ul{ list-style:none; margin:0; padding:0; }
-button{ font-family:inherit; cursor:pointer; }
-input, select{ font-family:inherit; }
+/* Fine grid-line background, usable on any section (e.g. <div class="bg-grid">) */
+.bg-grid{
+  background-image:
+    linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
+  background-size:40px 40px;
+}
 
-.mono{ font-family:var(--font-mono); }
-
-/* ===== Layout ===== */
+/* =========================================================
+   LAYOUT
+   ========================================================= */
 .wrap{
     width:90%;
     max-width:1400px;
@@ -80,7 +104,9 @@ input, select{ font-family:inherit; }
 }
 .wrap-narrow{ max-width:840px; margin:0 auto; padding:0 24px; position:relative; z-index:1; }
 
-/* ===== Header ===== */
+/* =========================================================
+   HEADER
+   ========================================================= */
 .site-header{
   position:sticky; top:0; z-index:40;
   border-bottom:1px solid var(--border);
@@ -138,7 +164,9 @@ input, select{ font-family:inherit; }
   50%{ opacity:.4; transform:scale(1.25); }
 }
 
-/* ===== Badges / Pills ===== */
+/* =========================================================
+   BADGES / PILLS
+   ========================================================= */
 .badge-row{ display:flex; flex-wrap:wrap; gap:8px; }
 .pill{
   display:inline-flex; align-items:center; gap:7px;
@@ -161,7 +189,9 @@ input, select{ font-family:inherit; }
 .pill-mod{ border-color:rgba(245,158,11,0.2); background:rgba(245,158,11,0.06); color:var(--alert-mod); }
 .pill-mod .dot{ background:var(--alert-mod); box-shadow:0 0 8px var(--alert-mod); }
 
-/* ===== Typography ===== */
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
 h1,h2,h3,h4{ font-family:var(--font-display); font-weight:700; margin:0; letter-spacing:-0.02em; }
 .eyebrow{
   font-family:var(--font-mono); font-size:11px; text-transform:uppercase;
@@ -173,7 +203,9 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
 .text-muted{ color:var(--muted); }
 .lede{ color:var(--muted);  font-size:20px;line-height:1.8;max-width:850px; }
 
-/* ===== Buttons ===== */
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 .btn{
   display:inline-flex; align-items:center; justify-content:center; gap:8px;
   padding:14px 28px; border-radius:10px; border:1px solid transparent;
@@ -200,7 +232,9 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
 .btn-block{ width:100%; }
 .btn[disabled]{ opacity:.45; pointer-events:none; }
 
-/* ===== Cards ===== */
+/* =========================================================
+   CARDS
+   ========================================================= */
 .card{
   background:rgba(255,255,255,0.015);
   border:1px solid var(--border);
@@ -211,7 +245,18 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
 }
 .card-strong{ background:var(--surface-strong); }
 
-/* NEW CODE TO FIXED DASHBOARD GRID & ICONS */
+/* Soft glow shadows for cards / buttons / icons */
+.glow-blue{ box-shadow:var(--shadow-glow-blue); }
+.glow-red{ box-shadow:var(--shadow-glow-red); }
+
+/* Gentle opacity pulse (distinct from the .dot siren-pulse animation already in use) */
+@keyframes pulse-siren{
+  0%, 100%{ opacity:1; }
+  50%{ opacity:0.4; }
+}
+.animate-siren{ animation:pulse-siren 1.4s ease-in-out infinite; }
+
+/* ---- Dashboard grid & icon wrappers (index/predict form) ---- */
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -247,7 +292,9 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
 .siren-icon { background: var(--siren-dim); color: var(--siren); }
 .subtle-icon { background: rgba(255, 255, 255, 0.05); color: var(--muted); }
 
-/* ===== Forms ===== */
+/* =========================================================
+   FORMS
+   ========================================================= */
 .field-group{ margin-bottom:20px; }
 .field-group label{
   display:inline-flex; align-items:center; gap:6px; /* Labels align vertically with icons */
@@ -297,7 +344,9 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
     font-weight:700; letter-spacing:-0.01em; }
 .section-block .section-desc{ color:var(--muted-2); font-size:15px; margin-top:4px; margin-bottom:0px; }
 
-/* ===== Footer ===== */
+/* =========================================================
+   FOOTER
+   ========================================================= */
 .site-footer{
   border-top:1px solid var(--border);
   padding:32px 1px; text-align:center;
@@ -305,7 +354,9 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
   text-transform:uppercase; letter-spacing:0.2em; color:var(--muted-2);
 }
 
-/* ===== Utility ===== */
+/* =========================================================
+   UTILITIES
+   ========================================================= */
 .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
 .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 @media (max-width:820px){ .grid-3{ grid-template-columns:1fr 1fr; } }
@@ -314,46 +365,15 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
 .stack-center{ text-align:center; }
 .mt-2{ margin-top:8px;} .mt-3{ margin-top:14px;} .mt-4{ margin-top:20px;} .mt-5{ margin-top:28px;} .mt-6{ margin-top:40px;}
 
-/* ===== Risk badge colors ===== */
+/* Risk badge colors */
 .risk-low{ color:var(--alert-low); }
 .risk-mod{ color:var(--alert-mod); }
 .risk-high{ color:var(--alert-mod); }
 .risk-crit{ color:var(--alert-crit); }
 
-::selection{ background:var(--primary); color:#fff; }
-::-webkit-scrollbar{ width:8px; height:8px; }
-::-webkit-scrollbar-track{ background:var(--bg); }
-::-webkit-scrollbar-thumb{ background:var(--border-strong); border-radius:4px; }
-
-/* ===== Responsive ===== */
-@media (max-width:720px){
-  .site-header .inner{ padding:0 4px; }
-  .nav a span.txt{ display:none; }
-}
-
-/* ===== Merged from reference (oklch source) — new utilities only ===== */
-
-/* Fine grid-line background, usable on any section (e.g. <div class="bg-grid">) */
-.bg-grid{
-  background-image:
-    linear-gradient(rgba(59,130,246,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59,130,246,0.06) 1px, transparent 1px);
-  background-size:40px 40px;
-}
-
-/* Soft glow shadows for cards / buttons / icons */
-.glow-blue{ box-shadow:var(--shadow-glow-blue); }
-.glow-red{ box-shadow:var(--shadow-glow-red); }
-
-/* Gentle opacity pulse (distinct from the .dot siren-pulse animation already in use) */
-@keyframes pulse-siren{
-  0%, 100%{ opacity:1; }
-  50%{ opacity:0.4; }
-}
-.animate-siren{ animation:pulse-siren 1.4s ease-in-out infinite; }
-/* ===================================================================
-   CASE REPORT — redesigned interface (hero ring, stat cards, charts)
-   =================================================================== */
+/* =========================================================
+   CASE REPORT — hero ring, stat cards, charts
+   ========================================================= */
 
 /* ---- Top action bar ---- */
 .report-topbar{
@@ -528,10 +548,10 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
 .action-text{ font-size:14px; padding-top:3px; color:var(--text); font-weight:500; }
 .action-text.is-urgent{ color:var(--siren); }
 
-/* ===================================================================
-   PRINT-ONLY CASE TICKET  (used by the "Case Ticket PDF" button)
+/* =========================================================
+   PRINT-ONLY CASE TICKET
    On screen: hidden. In print: the ONLY thing that shows.
-   =================================================================== */
+   ========================================================= */
 .print-ticket{ display:none; }
 
 @media print{
@@ -551,38 +571,6 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
     margin:0 auto;
   }
   .print-ticket *{ box-shadow:none !important; text-shadow:none !important; filter:none !important; }
-}
-
-@media (max-width: 768px){
-
-  .wrap{
-    width:100%;
-    padding:0 10px;
-    margin_right:-20px;  }
-
-  .card{
-    width:101%;
-    padding:20px;
-  }
-
-  .hero-verdict-card{
-    width:100%;
-  }
-
-  .stat-grid{
-    grid-template-columns:1fr;
-  }
-
-  .grid-2{
-    grid-template-columns:1fr;
-  }
-
-  .grid-3{
-    grid-template-columns:1fr;
-  }
-.btn-ghost {
-  padding: 5px 12px 10px 14px;
-}
 }
 
 .ticket-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
@@ -622,3 +610,239 @@ h1 { font-size: clamp(32px, 5vw, 48px); line-height: 1.15; }
 .ticket-actions .ticket-action-num{ font-family:var(--font-mono); color:var(--primary); font-weight:700; }
 
 .ticket-footnote{ margin-top:28px; font-size:10px; color:var(--primary); }
+
+
+/* =====================================================================
+   RESPONSIVE — MOBILE (organized by page/section, largest → smallest)
+   ===================================================================== */
+
+/* ---- Global: header padding + nav link truncation ---- */
+@media (max-width:720px){
+  .site-header .inner{ padding:0 7px; }
+  .nav a span.txt{ display:none; }
+
+  .brand{ font-size:13px; gap:6px; }
+  .brand-badge{ width:30px; height:30px; }
+  .brand-badge svg{ width:13px; height:13px; }
+
+  .nav{
+    gap:0;
+    margin-right:8px;
+    margin-left:4px;
+  }
+  .nav a{
+    padding:8px 8px;
+    font-size:9px;
+    letter-spacing:0.08em;
+  }
+
+  .status-pill{ display:none; }
+}
+
+/* ---- Case Report: overall layout stacking ---- */
+@media(max-width:768px){
+  html,body{ overflow-x:hidden; }
+  .wrap{ width:100%; padding:0 16px; }
+  .card{ width:100%; padding:20px; }
+  .hero-verdict-card{ width:100%; flex-direction:column; align-items:flex-start; }
+  .hero-verdict-left{ min-width:100%; }
+  .hero-verdict-right{ width:100%; }
+  .prob-ring-wrap{ width:170px; height:170px; }
+  .stat-grid, .grid-2, .grid-3{ grid-template-columns:1fr; }
+  .stat-card{ padding:20px; }
+}
+
+/* ---- Index / Home page ---- */
+@media (max-width:640px){
+  main.wrap h1[style*="font-size:68px"]{
+    font-size:32px !important;
+    line-height:1.2 !important;
+    max-width:100% !important;
+  }
+
+  .lede{
+    font-size:15px !important;
+    line-height:1.6 !important;
+  }
+
+  .pill{
+    font-size:8px !important;
+    padding:5px 10px !important;
+  }
+
+  .section-block h3{
+    font-size:17px !important;
+  }
+  .section-desc{
+    font-size:12px !important;
+  }
+
+  .field-group label{
+    font-size:11px !important;
+  }
+
+  .field-group select,
+  .field-group input[type="number"]{
+    height:46px !important;
+    font-size:13px !important;
+  }
+  .card.section-block{
+    padding:20px !important;
+  }
+}
+@media (max-width:640px){
+  #analyze-btn{
+    padding:14px 32px !important;
+    font-size:13px !important;
+    width:auto !important;
+  }
+}
+@media (max-width:400px){
+  main.wrap h1[style*="font-size:68px"]{
+    font-size:53px !important;
+  }
+}
+
+/* ---- History page ---- */
+@media (max-width:640px){
+  #history-list .card{
+    flex-direction:column;
+    align-items:flex-start !important;
+    gap:14px !important;
+    padding:18px 20px !important;
+  }
+  #history-list .card > div:first-child,
+  #history-list .card > div:last-child{
+    width:100%;
+  }
+  #history-list .card > div:last-child{
+    justify-content:space-between;
+    gap:10px !important;
+  }
+
+  #history-list span[style*="font-size:32px"]{
+    font-size:22px !important;
+  }
+
+  #history-list .mono[style*="font-size:15px"]{
+    font-size:13px !important;
+  }
+
+  #history-list .text-muted.mono[style*="font-size:13px"],
+  #history-list span[style*="font-size:13px"]{
+    font-size:11px !important;
+  }
+
+  #history-list .btn.btn-ghost{
+    font-size:10px !important;
+    padding:10px 14px !important;
+  }
+}
+
+/* ---- Case Report: text sizes + probability ring ---- */
+@media (max-width:640px){
+  /* Top bar */
+  .back-link{ font-size:12px !important; }
+  .btn.btn-sm{ font-size:10px !important; padding:10px 16px !important; }
+
+  /* Hero verdict card */
+  .eyebrow{ font-size:10px !important; }
+  .verdict-title{ font-size:28px !important; }
+  .risk-pill{ font-size:10px !important; padding:5px 12px !important; }
+
+  .prob-ring-wrap{ width:150px !important; height:150px !important; }
+  .prob-ring-value{ font-size:36px !important; }
+  .prob-ring-pct{ font-size:24px !important; }
+  .prob-ring-caption{ font-size:9px !important; }
+
+  .stat-card{ padding:16px !important; }
+  .stat-label{ font-size:10px !important; }
+  .stat-value{ font-size:19px !important; }
+
+  .section-title-dot{ font-size:15px !important; }
+  .section-desc{ font-size:12px !important; }
+
+  .contrib-name{ font-size:10px !important; }
+  .contrib-tooltip{ font-size:10px !important; }
+
+  .action-text{ font-size:12px !important; }
+  .action-num{ font-size:10px !important; width:22px !important; height:22px !important; }
+
+  #trace-log{
+    font-size:12px !important;
+    line-height:1.7 !important;
+  }
+}
+
+/* ---- Case Report: pull ring up closer to text ---- */
+@media (max-width:640px){
+  .hero-verdict-card{
+    gap:12px !important;
+  }
+  .hero-verdict-right{
+    margin-top:-110px !important;
+  }
+  .prob-ring-wrap{
+    width:150px !important;
+    height:150px !important;
+    margin-top:0 !important;
+  }
+}
+
+/* ---- About page ---- */
+@media (max-width:640px){
+  main.wrap h1[style*="font-size:58px"]{
+    font-size:51px !important;
+    line-height:1.25 !important;
+    max-width:100% !important;
+  }
+
+  .lede{
+    font-size:15px !important;
+    line-height:1.6 !important;
+  }
+
+  h3[style*="font-size:25px"]{
+    font-size:18px !important;
+  }
+  p[style*="font-size:17px"]{
+    font-size:13px !important;
+    line-height:1.6 !important;
+  }
+
+  h3[style*="font-size:20px"]{
+    font-size:16px !important;
+  }
+
+  .grid-3 .card p.mono[style*="font-size:17px"]{
+    font-size:14px !important;
+  }
+  .grid-3 .card p.text-muted[style*="font-size:17px"]{
+    font-size:12.5px !important;
+  }
+
+  h3[style*="font-size:18px"]{
+    font-size:15px !important;
+  }
+
+  /* Feature rows text */
+  span[style*="font-size:16px"]{
+    font-size:13px !important;
+  }
+  div[style*="padding: 16px 24px"]{
+    padding:14px 16px !important;
+  }
+
+  .card h3.text-siren[style*="font-size:20px"]{
+    font-size:16px !important;
+  }
+
+  .stack-center .btn.btn-primary[style*="padding:20px 42px"]{
+    padding:14px 30px !important;
+    font-size:11px !important;
+  }
+
+  .card{
+    padding:20px !important;
+  }
+}
